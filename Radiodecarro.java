@@ -7,6 +7,9 @@
 // radio de carro
 //*******************************************************************
 
+ import java.math.BigDecimal; // libreria para darle formato a los datos float
+
+
 public class Radiodecarro implements Radio{
 	private boolean estado;		//indica si el radio esta on o off
 	private int AMFM;			//indica si el radio esta en AM oFM
