@@ -457,7 +457,7 @@ public class Pioneer extends javax.swing.JFrame{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // obtiene donde quiere guardar la senal y la guarda.
         
-        int bo = jComboBox1.getSelectedIndex()+ 1;
+        int bo = jComboBox1.getSelectedIndex();
         rad.guardar(bo);
         
         
