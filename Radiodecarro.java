@@ -1,5 +1,5 @@
 //*******************************************************************
-//Autores: Julio Castillo, Mario Galvéz, Darwin Rivas y Diego Rosales
+//Autores: Julio Castillo, Mario Galvez, Darwin Rivas y Diego Rosales
 //Seccion: 20
 //
 //Nobmbe de Archivo: Radiodecarro.java
@@ -8,15 +8,16 @@
 //*******************************************************************
 
 public class Radiodecarro implements Radio{
-	private boolean estado;
-	private int AMFM;
-	private float[] botonesAM;
-	private float[] botonesFM;
-	private float estacion;
-	private float intervalo;
-	private float AM;
-	private float FM;
+	private boolean estado;		//indica si el radio esta on o off
+	private int AMFM;			//indica si el radio esta en AM oFM
+	private float[] botonesAM;	//las memorias guardadas de AM
+	private float[] botonesFM;	//las memorias guardadas de FM
+	private float estacion;		//la estacion sintonizada actualmente
+	private float intervalo;	//en cuanto se va a cambiar la estacion
+	private float AM;			//ultima estacion sintonizada en AM
+	private float FM;			//ultima estacion sintonizada en FM
 	
+	//constructor predeterminado
 	public Radiodecarro(){
 		estado=false;
 		AMFM=0;
@@ -26,24 +27,32 @@ public class Radiodecarro implements Radio{
 		intervalo=10.00f;
 		AM=530.00f;
 		FM=87.9f;
+		int x=0;
+		while (x<12){
+			botonesAM[x]=530;
+			botonesFM[x]=87.9;
+		}
 	}
 	
-	public void setEstado(boolean nEstado){
-		estado=nEstado;
+	//setEstado
+	public void setEstado(boolean estado){
+		estado=estado;
 	}
 	
+	//getEstado
 	public boolean getEstado(){
 		return estado;
 	}
 	
-	public void setAMFM(int banda){
+	//setAMFM
+	public void setAMFM(int amfm){
 		if (AMFM==0){
 			AM=estacion;
 		}
 		else{
 			FM=estacion;
 		}
-		AMFM=banda;
+		AMFM=amfm;
 		if (AMFM==0){
 			intervalo=10.00f;
 			estacion=AM;
@@ -54,12 +63,15 @@ public class Radiodecarro implements Radio{
 		}
 	}
 	
+	//getAMFM
 	public int getAMFM(){
 		return AMFM;
 	}
 	
-	public void sintonizar(boolean ud){
-		if (ud){
+	//depenciendo del valor enviado en el parametro varia estacion
+	//en una cantidad guardada en intervalo hacia ariba o hacia abajo
+	public void sintonizar(boolean direccion){
+		if (direccion){
 			estacion+=intervalo;
 		}
 		else{
@@ -85,6 +97,8 @@ public class Radiodecarro implements Radio{
 		}
 	}
 	
+	//Guarda la estacon actual en la posicion de memoria enviada
+	//en el parametro en la lista corespondiente al tipo de frecuencia
 	public void guardar(int pos){
 		if (AMFM==0){
 			botonesAM[pos-1]=estacion;
@@ -94,6 +108,8 @@ public class Radiodecarro implements Radio{
 		}
 	}
 	
+	//Guarda en estacion el valor de la posicion enviada en el parametro
+	//en la lista correspondiente al ancho de banda seleccionado actualmente
 	public void memoria(int pos){
 		if (AMFM==0){
 			estacion=botonesAM[pos-1];
@@ -103,6 +119,7 @@ public class Radiodecarro implements Radio{
 		}
 	}
 	
+	//getEmisora
 	public float getEmisora(){
 		return estacion;
 	}
