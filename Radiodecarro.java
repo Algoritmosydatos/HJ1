@@ -29,14 +29,15 @@ public class Radiodecarro implements Radio{
 		FM=87.9f;
 		int x=0;
 		while (x<12){
-			botonesAM[x]=530;
-			botonesFM[x]=87.9;
+			botonesAM[x]=530f;
+			botonesFM[x]=87.9f;
+			x=x+1;
 		}
 	}
 	
 	//setEstado
 	public void setEstado(boolean estado){
-		estado=estado;
+		this.estado=estado;
 	}
 	
 	//getEstado
@@ -95,16 +96,17 @@ public class Radiodecarro implements Radio{
 				estacion=107.9f;
 			}
 		}
+		
 	}
 	
 	//Guarda la estacon actual en la posicion de memoria enviada
 	//en el parametro en la lista corespondiente al tipo de frecuencia
 	public void guardar(int pos){
 		if (AMFM==0){
-			botonesAM[pos-1]=estacion;
+			botonesAM[pos]=estacion;
 		}
 		else{
-			botonesFM[pos-1]=estacion;
+			botonesFM[pos]=estacion;
 		}
 	}
 	
@@ -112,15 +114,19 @@ public class Radiodecarro implements Radio{
 	//en la lista correspondiente al ancho de banda seleccionado actualmente
 	public void memoria(int pos){
 		if (AMFM==0){
-			estacion=botonesAM[pos-1];
+			estacion=botonesAM[pos];
 		}
 		else{
-			estacion=botonesFM[pos-1];
+			estacion=botonesFM[pos];
 		}
 	}
 	
 	//getEmisora
 	public float getEmisora(){
+		int decimalPlaces = 2;
+		BigDecimal bd = new BigDecimal(estacion);
+		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+		estacion = (float) bd.doubleValue(); // se le da un formato con dos decimales a 'emisoraActualFM'
 		return estacion;
 	}
 	
